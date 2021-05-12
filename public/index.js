@@ -5,9 +5,9 @@ let options = {
 };
 let map = new kakao.maps.Map(container, options);
 
-let input = document.querySelector(".searchInput");
-let btn = document.querySelector(".searchButton");
-let form = document.querySelector(".searchForm");
+let input = document.querySelector(".search-input");
+let btn = document.querySelector(".search-button");
+let form = document.querySelector(".search-form");
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();

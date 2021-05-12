@@ -9,25 +9,22 @@
             }
             body{
                 padding: 0px;
+                margin: 0px;
             }
         </style>
         <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
         <div id="container">
-            <form class="searchForm" action="">
+            <form class="search-form" action="">
                 <div class="search-wrap">
-                    <div className="search-title">CCTV 안전지대 지도</div>
+                    <div class="search-title">CCTV 안전지대 지도</div>
                     <input class="search-input" placeholder="검색어를 입력하세요" type="text">
                     <input type="submit" value="검색" class="search-button">
                 </div>
             </form>
             <div class="map-wrap">
                 <div id="map"></div>
-                <!-- <script
-                    type="text/javascript"
-                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b547a1b7a6c3bb23f581576407cc857"
-                ></script> -->
                 <script
                     type="text/javascript"
                     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b547a1b7a6c3bb23f581576407cc857&libraries=services,clusterer,drawing"
