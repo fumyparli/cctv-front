@@ -39,7 +39,7 @@ form.addEventListener("submit", (e) => {
                 // strokeColor: "#75B8FA", // 선의 색깔입니다
                 strokeColor: "red",
                 strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                strokeStyle: "dashed", // 선의 스타일 입니다
+                // strokeStyle: "dashed", // 선의 스타일 입니다
                 // fillColor: "#CFE7FF", // 채우기 색깔입니다
                 fillColor: "red",
                 fillOpacity: 0.7, // 채우기 불투명도 입니다
