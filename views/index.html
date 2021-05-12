@@ -3,32 +3,36 @@
     <head>
         <meta charset="utf-8" />
         <title>Kakao 지도 시작하기</title>
+        <style>
+            input {
+                all: unset;
+            }
+            body{
+                padding: 0px;
+            }
+        </style>
         <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
         <div id="container">
-            <div id="leftElements">
-                <div class="searchWrap">
-                    <form class="searchForm" action="">
-                        <input class="searchInput" type="text">
-                        <button class="searchButton">검색</button>
-                    </form>
+            <form class="searchForm" action="">
+                <div class="search-wrap">
+                    <div className="search-title">CCTV 안전지대 지도</div>
+                    <input class="search-input" placeholder="검색어를 입력하세요" type="text">
+                    <input type="submit" value="검색" class="search-button">
                 </div>
-                <div class="mapWrap">
-                    <div id="map" style="width: 800px; height: 600px"></div>
-                    <!-- <script
-                        type="text/javascript"
-                        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b547a1b7a6c3bb23f581576407cc857"
-                    ></script> -->
-                    <script
-                        type="text/javascript"
-                        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b547a1b7a6c3bb23f581576407cc857&libraries=services,clusterer,drawing"
-                    ></script>
-                    <script src=index.js></script>
-                </div>
-            </div>
-            <div id="rightElements">
-                
+            </form>
+            <div class="map-wrap">
+                <div id="map"></div>
+                <!-- <script
+                    type="text/javascript"
+                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b547a1b7a6c3bb23f581576407cc857"
+                ></script> -->
+                <script
+                    type="text/javascript"
+                    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1b547a1b7a6c3bb23f581576407cc857&libraries=services,clusterer,drawing"
+                ></script>
+                <script src=index.js></script>
             </div>
         </div>
     </body>
