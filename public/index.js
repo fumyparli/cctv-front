@@ -9,6 +9,8 @@ let input = document.querySelector(".search-input");
 let btn = document.querySelector(".search-button");
 let form = document.querySelector(".search-form");
 
+let marker = null, circle = null, infowindow = null;
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log(input.value);
@@ -16,23 +18,24 @@ form.addEventListener("submit", (e) => {
     geocoder.addressSearch(input.value, function (result, status) {
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
+            resetCircle(marker, circle, infowindow);
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
             // axios
 
             // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
+            marker = new kakao.maps.Marker({
                 map: map,
                 position: coords,
             });
 
             // 인포윈도우로 장소에 대한 설명을 표시합니다
-            var infowindow = new kakao.maps.InfoWindow({
+            infowindow = new kakao.maps.InfoWindow({
                 content:
                     '<div style="width:150px;text-align:center;padding:6px 0;">위험함</div>',
             });
             infowindow.open(map, marker);
 
-            var circle = new kakao.maps.Circle({
+            circle = new kakao.maps.Circle({
                 center: new kakao.maps.LatLng(result[0].y, result[0].x), // 원의 중심좌표 입니다
                 radius: 50, // 미터 단위의 원의 반지름입니다
                 strokeWeight: 5, // 선의 두께입니다
@@ -53,3 +56,11 @@ form.addEventListener("submit", (e) => {
         }
     });
 });
+
+function resetCircle(marker, circle, infowindow) {
+    if (circle && marker && infowindow) {
+        circle.setMap(null);
+        marker.setMap(null);
+        infowindow.close();
+    }
+}
