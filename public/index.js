@@ -66,8 +66,8 @@ form.addEventListener("submit", (e) => {
                 strokeWeight: 5, // 선의 두께입니다
                 // strokeColor: "red", // 위험 원
                 // fillColor: "red",
-                strokeColor: "green", // 안전 원
-                fillColor: "green",
+                strokeColor: "yellowgreen", // 안전 원
+                fillColor: "yellowgreen",
                 strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                 strokeStyle: "solid", // 선의 스타일 입니다
                 fillOpacity: 0.4, // 채우기 불투명도 입니다
