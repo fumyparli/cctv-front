@@ -71,12 +71,6 @@ form.addEventListener("submit", (e) => {
         position: coords,
       });
 
-      // 결과값으로 받은 위치를 마커로 표시합니다
-      marker = new kakao.maps.Marker({
-        map: map,
-        position: coords,
-      });
-
       // 인포윈도우로 장소에 대한 설명을 표시합니다
       infowindow = new kakao.maps.InfoWindow({
         content:
@@ -109,7 +103,37 @@ form.addEventListener("submit", (e) => {
 
 kakao.maps.event.addListener(map, "click", function (mouseEvent) {
   const latlng = mouseEvent.latLng;
+  const lat = latlng.getLat(), long = latlng.getLng();
+  const rad = 100;
   resetCircle(marker, circle, infowindow);
+
+  fetch(`${BASE_URL}/get_cctv_list`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      latitude: lat,
+      longitude: long,
+      radius: 1,
+    }),
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      let { result } = res;
+      let coords = result.map((data) => {
+        return new kakao.maps.LatLng(data.latitude, data.longitude);
+      });
+      coords.forEach((coor) => {
+        console.log(coor);
+        createCCTVMarker(map, coor);
+      });
+      console.log("DONE");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
   marker = new kakao.maps.Marker({
     map: map,
     position: latlng,
@@ -123,7 +147,7 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
 
   circle = new kakao.maps.Circle({
     center: latlng,
-    radius: 100,
+    radius: rad,
     strokeWeight: 5,
     strokeColor: "yellowgreen", // 안전 원
     fillColor: "yellowgreen",
