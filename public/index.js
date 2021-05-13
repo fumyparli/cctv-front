@@ -9,7 +9,9 @@ let input = document.querySelector(".search-input");
 let btn = document.querySelector(".search-button");
 let form = document.querySelector(".search-form");
 
-let marker = null, circle = null, infowindow = null;
+let marker = null,
+    circle = null,
+    infowindow = null;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -20,7 +22,25 @@ form.addEventListener("submit", (e) => {
         if (status === kakao.maps.services.Status.OK) {
             resetCircle(marker, circle, infowindow);
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            // axios
+            // fetch 서버에 요청 하는 부분
+            // 응답 받은 배열로 마커 표시 app.js에 랜덤으로 1000개 세팅 되어 있음
+            fetch("http://127.0.0.1:3000/coor")
+                .then((response) => response.json())
+                .then((data) => {
+                    let coords = data.map((coor) => {
+                        return new kakao.maps.LatLng(coor[1], coor[0]);
+                    });
+                    coords.forEach((coor) => {
+                        console.log(coor);
+                        marker = new kakao.maps.Marker({
+                            map: map,
+                            position: coor,
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             marker = new kakao.maps.Marker({
