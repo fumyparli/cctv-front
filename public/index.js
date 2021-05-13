@@ -35,11 +35,13 @@ form.addEventListener("submit", (e) => {
           });
           coords.forEach((coor) => {
             console.log(coor);
-            marker = new kakao.maps.Marker({
-              map: map,
-              position: coor,
-            });
+            createCCTVMarker(map, coor);
+            // marker = new kakao.maps.Marker({
+            //   map: map,
+            //   position: coor,
+            // });
           });
+          console.log("DONE");
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -79,6 +81,22 @@ form.addEventListener("submit", (e) => {
     }
   });
 });
+
+// image 모양의 CCTV 마커 생성해주는 함수입니다
+const createCCTVMarker = (map, position) => {
+    const markerImage = (new kakao.maps.MarkerImage(
+        'https://www.spatic.go.kr/img/kor/marker02.png',
+        new kakao.maps.Size(24, 35),
+        { offset: new kakao.maps.Point(16, 35) }));
+
+    const marker = new kakao.maps.Marker({
+        map: map,
+        position: position, // new kakao.maps.LatLng(position.lat, position.lng),
+        image: markerImage,
+        clickable: true
+    });
+    marker.setMap(map);
+} 
 
 function resetCircle(marker, circle, infowindow) {
   if (circle && marker && infowindow) {
