@@ -98,6 +98,18 @@ const createCCTVMarker = (map, position) => {
     marker.setMap(map);
 } 
 
+// 두 좌표 지점의 거리를 미터로 나타내는 함수입니다.
+// startPos: LngLat, endPos: LngLat
+function distance(startPos, endPos) {
+    const pl = new kakao.maps.Polyline({
+        path: [
+            startPos,
+            endPos
+        ], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+    });
+    return pl.getLength();
+}
+
 function resetCircle(marker, circle, infowindow) {
   if (circle && marker && infowindow) {
     circle.setMap(null);
